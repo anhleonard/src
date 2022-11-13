@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhân Khẩu</title>
+    <script type="module">
+        import User from '../../models/user.js';
+    </script>
+    <script>
+        function selectAllBox() {
+            let arrId = [];
+            let userCheckBox = document.querySelectorAll('[name="selectAllUser[]"]');
+            userCheckBox.forEach((user) => arrId.push(user.id));
+            let ele = document.getElementById("checkbox-all");
+            let isSelectAll = ele.checked;
+            //
+            let deleteUser = document.getElementsByClassName("delete-people-title")[0];
+            let updateUser = document.getElementsByClassName("update-people-title")[0];
+            if (isSelectAll) {
+              userCheckBox.forEach((item) => (item.checked = true));
+              deleteUser.disabled = false;
+              updateUser.disabled = false;
+            } else {
+              userCheckBox.forEach((item) => (item.checked = false));
+              deleteUser.disabled = true;
+              updateUser.disabled = true;
+            }
+          }
+    </script>
+    <link rel="stylesheet" href="/css/nhankhau.css">
+</head>
+
+<body>
+    <div onclick="check">
+        TEST
+    </div>
+    <div style="width: 100%;">
+        <div class="form-alert">
+            <div class="form-alert-text">
+                Bạn có chắc chắn xóa không?
+            </div>
+            <div class="form-alert-btn">
+                <button class="btn-delete" onclick="deleteBtn()">Xóa</button>
+                <button class="btn-cancel" onclick="cancelBtn()">Hủy</button>
+            </div>
+        </div>
+        <div class="people-options">
+            <button class="add-people-title" onclick="addPeople()">Thêm nhân khẩu</button>
+            <br>
+            <br>
+            <button class="delete-people-title" disabled onclick="deletePeople()">Xóa nhân khẩu</button>
+            <br>
+            <br>
+            <button class="update-people-title" disabled>Cập nhật nhân khẩu</button>
+            <br>
+            <br>
+            <button>Tìm kiếm nhân khẩu</button>
+            <br>
+            <br>
+        </div>
+        <br><br>
+        <div class="table-component">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã nhân khẩu</th>
+                        <th>Tên nhân khẩu</th>
+                        <th>Tuổi</th>
+                        <th>Số CMND</th>
+                        <th>Số điện thoại</th>
+                        <th>Mã hộ khẩu</th>
+                        <th>Quan hệ với chủ hộ</th>
+                        <th>
+                            <input type="checkbox" name="checkbox-all" id="checkbox-all" onchange="selectAllBox()">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach( (user)=> {
+                        %>
+                        <tr>
+                            <td>
+                                <%= user.ma_nhan_khau %>
+                            </td>
+                            <td>
+                                <%= user.ten_nhan_khau %>
+                            </td>
+                            <td>
+                                <%= user.age %>
+                            </td>
+                            <td>
+                                <%= user.cmndNumber %>
+                            </td>
+                            <td>
+                                <%= user.phoneNumber %>
+                            </td>
+                            <td>
+                                <%= user.ma_ho_khau %>
+                            </td>
+                            <td>
+                                <%= user.relation %>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="selectAllUser[]" id="<%= user.ma_nhan_khau %>"
+                                    onclick="myCheck(this.id)">
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-people">
+            <div style="margin-bottom: 16px">THÊM NHÂN KHẨU</div>
+            <div>
+                <form action="/home/nhankhau" method="post">
+                    <label for="ma_nhan_khau">Mã nhân khẩu</label>
+                    <input type="number" id="ma_nhan_khau" name="ma_nhan_khau">
+                    <br><br>
+                    <label for="ten_nhan_khau">Tên nhân khẩu</label>
+                    <input type="text" id="ten_nhan_khau" name="ten_nhan_khau">
+                    <br><br>
+                    <label for="age">Tuổi</label>
+                    <input type="number" id="age" name="age">
+                    <br><br>
+                    <label for="cmndNumber">Số CMND</label>
+                    <input type="number" id="cmndNumber" name="cmndNumber">
+                    <br><br>
+                    <label for="phoneNumber">Số điện thoại</label>
+                    <input type="number" id="phoneNumber" name="phoneNumber">
+                    <br><br>
+                    <label for="ma_ho_khau">Mã hộ khẩu</label>
+                    <input type="number" id="ma_ho_khau" name="ma_ho_khau">
+                    <br><br>
+                    <label for="relation">Quan hệ với chủ hộ</label>
+                    <input type="text" id="relation" name="relation">
+                    <br><br>
+                    <input type="submit" value="THÊM">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+* {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.add-people {
+    text-align: center;
+}
+
+.table-component {
+    display: inline-block;
+    height: 500px;
+    overflow: auto;
+    width: 100%;
+}
+
+table th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+
+/* == Just general styling, not relevant :) == */
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #009879;
+    color: #fff;
+}
+
+th,
+td {
+    padding: 1em .5em;
+}
+
+table tr {
+    color: #212121;
+}
+
+table tr:nth-child(odd) {
+    background-color: #BBDEFB;
+}
+
+.people-options {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.form-alert {
+    width: 350px;
+    height: 150px;
+    background-color: antiquewhite;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    display: none;
+}
+
+.form-alert-text {
+    width: 100%;
+    margin-bottom: 35px;
+    font-size: 20px;
+}
+
+.form-alert-btn {
+    width: 100%;
+}
+.form-alert-btn button:nth-child(1) {
+    margin-right: 40px;
+}
